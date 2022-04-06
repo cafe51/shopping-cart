@@ -47,6 +47,14 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => {
-  fetchProducts(criaTudo);
+window.onload = async () => {
+  const data = await fetchProducts('computador');
+  criaTudo(data.results);
  };
+
+// module.exports = {
+//     createProductImageElement,
+//     createCustomElement,
+//     createProductItemElement,
+//     criaTudo,
+// };
