@@ -10,11 +10,11 @@ const fetchProducts = async (coisa) => {
   }
 };
 
-async function imprime() {
-   console.log(await fetchProducts());
-}
+// async function imprime() {
+//    console.log(await fetchProducts());
+// }
 
-imprime();
+// imprime();
 
 // window.onload = () => {
 //   // fetchCurrency();
