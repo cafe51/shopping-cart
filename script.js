@@ -1,5 +1,10 @@
 listaCarrinho = document.querySelector('.cart__items');
 
+// listaCarrinho.addEventListener('click', (event) => {
+//     event.target.parentNode.removeChild(event.target);
+//     saveCartItems();
+//   });
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -56,26 +61,29 @@ async function productItemClickListener(event) {
   const id = getSkuFromProductItem(event.target.parentNode);
   const item = await fetchItem(id);
   listaCarrinho.appendChild(createCartItemElement(item));
+  saveCartItems();
   // console.log(createCartItemElement(item));
 }
 
-function createFetchItem() {
+function productListEventListener() {
   const botoes = document.querySelectorAll('.item__add');
 return botoes.forEach((element) => {
   element.addEventListener('click', productItemClickListener);
 });
 }
 
+function removeList() {
+  listaCarrinho.childNodes.forEach((element) => {
+    element.addEventListener('click', cartItemClickListener);
+  });
+}
 window.onload = async () => {
   const data = await fetchProducts('computador');
   criaTudo(data.results);
 
-  createFetchItem();
-};
+  productListEventListener();
 
-// module.exports = {
-//     createProductImageElement,
-//     createCustomElement,
-//     createProductItemElement,
-//     criaTudo,
-// };
+  getSavedCartItems();
+
+  removeList();
+};
