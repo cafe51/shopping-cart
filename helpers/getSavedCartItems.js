@@ -4,7 +4,6 @@ const getSavedCartItems = () => {
   const list = localStorage.getItem('favorites');
 
   favorites.innerHTML = list;
-  
 };
 
 if (typeof module !== 'undefined') {
