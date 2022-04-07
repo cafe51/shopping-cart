@@ -56,6 +56,7 @@ function getSkuFromProductItem(item) {
 async function cartItemClickListener(event) {
   // coloque seu código aqui
   event.target.parentNode.removeChild(event.target);
+  saveCartItems(listaCarrinho.innerHTML);
   somaDosPreços();
 }
 
@@ -95,7 +96,17 @@ function getListBack() {
   listaCarrinho.innerHTML = getSavedCartItems(); 
 }
 
+function clearCart() {
+  const botao = document.querySelector('.empty-cart');
+  botao.addEventListener('click', () => { 
+  listaCarrinho.innerHTML = ''; 
+  saveCartItems(listaCarrinho.innerHTML);
+  });
+}
+
 window.onload = async () => {
+  clearCart();
+
   const data = await fetchProducts('computador');
   criaTudo(data.results);
 
@@ -104,6 +115,6 @@ window.onload = async () => {
   getListBack();
 
   removeList();
-  
+
   somaDosPreços();
 };
