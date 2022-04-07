@@ -74,7 +74,7 @@ async function productItemClickListener(event) {
   const item = await fetchItem(id);
   listaCarrinho.appendChild(createCartItemElement(item));
   somaDosPreços();
-  saveCartItems();
+  saveCartItems(listaCarrinho.innerHTML);
   // console.log(createCartItemElement(item));
 }
 
@@ -96,7 +96,7 @@ window.onload = async () => {
 
   productListEventListener();
 
-  getSavedCartItems();
+  getSavedCartItems(listaCarrinho);
 
   removeList();
 
