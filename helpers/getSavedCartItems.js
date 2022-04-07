@@ -1,9 +1,9 @@
-const getSavedCartItems = (lista) => {
+const getSavedCartItems = () => {
   // seu código aqui
-  const favorites = lista;
-  const list = localStorage.getItem('cartItems');
+  // const favorites = document.querySelector('.cart__items');
+ return localStorage.getItem('cartItems');
 
-  favorites.innerHTML = list;
+  // favorites.innerHTML = list;
 };
 
 if (typeof module !== 'undefined') {

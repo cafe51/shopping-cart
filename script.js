@@ -90,15 +90,20 @@ function removeList() {
     element.addEventListener('click', cartItemClickListener);
   });
 }
+
+function getListBack() {
+  listaCarrinho.innerHTML = getSavedCartItems(); 
+}
+
 window.onload = async () => {
   const data = await fetchProducts('computador');
   criaTudo(data.results);
 
   productListEventListener();
 
-  getSavedCartItems(listaCarrinho);
+  getListBack();
 
   removeList();
-
+  
   somaDosPreços();
 };
