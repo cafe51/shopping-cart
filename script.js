@@ -6,12 +6,15 @@ sectionCart.appendChild(valorTotal);
 valorTotal.innerText = `${0}`;
 
 function somaDosPreços() {
+  let total;
   let arra = [];
   const lista = listaCarrinho.childNodes;
-  lista.forEach((node) => arra.push(node.innerText));
-  arra = arra.map((e) => e.split('$')[1]);
-  arra = arra.map((e) => parseFloat(e, 10));
-  const total = arra.reduce((acc, result) => acc + result);
+  if (lista.length > 0) {
+    lista.forEach((node) => arra.push(node.innerText));
+    arra = arra.map((e) => e.split('$')[1]);
+    arra = arra.map((e) => parseFloat(e, 10));
+    total = arra.reduce((acc, result) => acc + result);
+  } else total = 0;
   valorTotal.className = 'total-price';
   valorTotal.innerText = `${total}`;
 }
@@ -42,7 +45,21 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   return section;
 }
 
+function showLoading() {
+  const secao = document.querySelector('.items');
+  const div = document.createElement('div');
+  div.className = 'loading';
+  div.innerText = 'CARREGANDO';
+  secao.appendChild(div);
+}
+
+function clearLoading() {
+  const secao = document.querySelector('.loading');
+  secao.parentNode.removeChild(secao);
+}
+
 function criaTudo(elemento) {
+  clearLoading();
   const secao = document.querySelector('.items');
   return elemento.forEach((element) => {
     secao.appendChild(createProductItemElement(element));
@@ -70,13 +87,11 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
 
 async function productItemClickListener(event) {
   // coloque seu código aqui
-  // console.log(getSkuFromProductItem(event.target.parentNode));
   const id = getSkuFromProductItem(event.target.parentNode);
   const item = await fetchItem(id);
   listaCarrinho.appendChild(createCartItemElement(item));
   somaDosPreços();
   saveCartItems(listaCarrinho.innerHTML);
-  // console.log(createCartItemElement(item));
 }
 
 function productListEventListener() {
@@ -104,7 +119,12 @@ function clearCart() {
   });
 }
 
+
+
+
 window.onload = async () => {
+  showLoading()
+
   clearCart();
 
   const data = await fetchProducts('computador');
