@@ -120,11 +120,8 @@ function clearCart() {
   });
 }
 
-
-
-
 window.onload = async () => {
-  showLoading()
+  showLoading();
 
   clearCart();
 
