@@ -50,6 +50,7 @@ function showLoading() {
   const div = document.createElement('div');
   div.className = 'loading';
   div.innerText = 'CARREGANDO';
+  div.style.fontSize = '100px';
   secao.appendChild(div);
 }
 
